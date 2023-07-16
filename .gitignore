@@ -1,0 +1,30 @@
+# Ignore appsettings.json and appsettings.Development.json
+appsettings.json
+appsettings.Development.json
+
+# Ignore bin and obj directories
+bin/
+obj/
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore wwwroot/lib directory
+wwwroot/lib/
+
+# Ignore log, user, and temporary files
+*.log
+*.vspscc
+*.vssscc
+*.suo
+*.user
+*.bak
+*.cache
+*.csproj.user
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
+*.sln.docstates
+*.suo
+*.user
