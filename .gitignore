@@ -28,3 +28,7 @@ wwwroot/lib/
 *.sln.docstates
 *.suo
 *.user
+
+# Ignore Visual Studio index files
+*.vsidx
+
