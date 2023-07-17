@@ -1,0 +1,117 @@
+﻿@page
+@model HospitalManagement.Pages.Recieptionist.AddAppointmentModel
+@{
+}
+<h1><i class="fa-regular fa-calendar-check mx-2"></i>Appointment Management</h1>
+<div class="card w-1"></div>
+<div class="row mt-3">
+    <div class="col-md-4">
+        <form>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="input-group mb-3">
+            <div>
+                <select class="form-control" id="department">
+                    <option>Select Department</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+            </div>
+            <div class="mx-4">
+                <select class="form-control" id="department">
+                    <option>Sort by default</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+            </div>
+        </div>
+        
+    </div>
+    <div>
+        <button class="btn btn-outline-primary float-end"><i class="fa-regular fa-calendar-check fa-beat mx-2"></i>Add new appointment</button>
+    </div>
+    <div class="row mt-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Fullname</th>
+                    <th>Gender</th>
+                    <th>Id number</th>
+                    <th>Date of birth</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Doctor</th>
+                    <th>Status</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>Male</td>
+                    <td>09289298911</td>
+                    <td>25/10/2002</td>
+                    <td>093213211</td>
+                    <td>cuong@gmail.com</td>
+                    <td>Ha Noi</td>
+                    <td>Tran Ngoc Cuong</td>
+                    <td><p class="text-warning">Not done</p></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>Male</td>
+                    <td>09289298911</td>
+                    <td>25/10/2002</td>
+                    <td>093213211</td>
+                    <td>cuong@gmail.com</td>
+                    <td>Ha Noi</td>
+                    <td>Tran Ngoc Cuong</td>
+                    <td><p class="text-success">Done</p></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="px-5">
+        </div>
+        <div class="col-md-8 mx-auto">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Previous</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">4</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">5</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </div>
+        <div>
+        </div>
+    </div>
+
+</div>
