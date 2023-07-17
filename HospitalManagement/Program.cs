@@ -8,6 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<SWD392_DBContext>();
+builder.Services.AddSingleton<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddSingleton<IDepartmentService, DepartmentService>();
+builder.Services.AddSingleton<IAppointmentService, AppointmentService>();
+builder.Services.AddSingleton<IAppointmentRepository, AppointmentRepository>();
+
 
 builder.Services.AddSingleton<SWD392_DBContext>();
 
