@@ -5,6 +5,39 @@
 <h1><i class="fa-regular fa-calendar-check mx-2"></i>Appointment Management</h1>
 <div class="card w-1"></div>
 <h2 class="mt-2">Patient Information</h2>
+<div class="alert-list">
+</div>
+@if (TempData["Message"] != null)
+{
+    @if (TempData["Message"].Equals("success"))
+    {
+        <script>
+            var alertList = $(".alert-list");
+            var el = document.createElement("div");
+            el.innerHTML = (`<div class="alert alert-success" role="alert">
+                                      Add appointment success
+                                    </div>`);
+            alertList.append(el);
+            setTimeout(() => {
+                $(el).remove();
+            }, 2500);
+        </script>
+    }
+    else
+    {
+        <script>
+            var alertList = $(".alert-list");
+            var el = document.createElement("div");
+            el.innerHTML = (`<div class="alert alert-danger" role="alert">
+                                                                             There are currently no doctors on duty in this department!
+                                                    </div>`);
+            alertList.append(el);
+            setTimeout(() => {
+                $(el).remove();
+            }, 2500);
+        </script>
+    }
+}
 <div class="row mt-3">
     <div class="col-md-4 row">
         <form asp-page-handler="Filter" method="get">
@@ -67,16 +100,19 @@
                         <td>@patient.Profile.Phone</td>
                         <td>@patient.Profile.Email</td>
                         <td>@patient.Profile.Address</td>
+                        <form asp-page-handler="AddAppointment" id="@i AddAppointmentForm">
                         <td>
-                            <select class="form-control" id="departmentSelect">
-                                <option>Select department</option>
-                                @foreach (var depart in Model.Departments)
-                                {
+                            <input type="hidden" value="@patient.Id" asp-for="PatientId">
+                            <select asp-for="@Model.DepartmentId" class="form-control" id="@i departmentSelect">
+                                <option value="0">Select department</option>
+                                    @foreach (var depart in Model.Departments)
+                                    {
                                     <option value="@depart.Id">@depart.Name</option>
-                                }
+                                    }
                             </select>
                         </td>
-                        <td><button class="btn btn-outline-primary"><i class="fa-regular fa-calendar-check fa-beat mx-2"></i> Add appointment</button></td>
+                        <td><button type="button" class="btn btn-outline-primary" id="addAppoint" onclick="submitForm(@i)"><i class="fa-regular fa-calendar-check fa-beat mx-2"></i> Add appointment</button></td>
+                        </form>
                     </tr>
                     i++;
                 }
@@ -108,62 +144,31 @@
 
 </div>
 
-@*<script>
-    function loadPatientFilter(sortOption, page, keyword) {
-        $.ajax({
-            url: '/Recieptionist/AddAppointment?handler=Filter',
-            type: 'GET',
-            data: { sortOption: sortOption, selectedPage: page, keyword: keyword },
-            success: function (data) {
+<script>
+    
 
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
-            }
-        });
+    function submitForm(i) {
+        // Lấy đối tượng form từ trang HTML
+        var form = document.getElementById(i+ " AddAppointmentForm");
+        var departmentSelect = document.getElementById(i+' departmentSelect');
+        // Submit form
+        if(departmentSelect.value == 0){
+            ShowAlert("danger", "Please select department!")
+            return;
+        }else{
+            form.submit();
+        }
     }
 
-
-
-    $(document).ready(function () {
-
-
-
-
-        // Lắng nghe sự kiện onchange của các select box và input
-        $('#sortSelect').on('change', function () {
-            var searchKeyword = $('#patientSearch').val();
-            var sortOption = $('#sortSelect').val();
-            var page = $('#currentPage').val();
-            if (!page) {
-                page = 1;
-            }
-            loadPatientFilter(sortOption, page, searchKeyword);
-        });
-    });
-
-    // Lắng nghe sự kiện click của các nút phân trang
-    $(document).on('click', '.pagination a', function (event) {
-        event.preventDefault();
-        var searchKeyword = $('#patientSearch').val();
-        var page = $(this).data('page');
-        if (!page) {
-            page = 1;
-        }
-        var sortOption = $('#sortSelect').val();
-        loadPatientFilter(sortOption, page, searchKeyword);
-        location.reload();
-    });
-
-    $(document).on('click', '#searchButton', function () {
-        var searchKeyword = $('#patientSearch').val();
-        var page = $(this).data('page');
-        if (!page) {
-            page = 1;
-        }
-
-        var sortOption = $('#sortSelect').val();
-        loadPatientFilter(sortOption, page, searchKeyword);
-
-    });
-</script>*@
+    function ShowAlert(attr, mess) {
+        var alertList = $(".alert-list");
+        var el = document.createElement("div");
+        el.innerHTML = (`<div class="alert alert-${attr}" role="alert">
+              ${mess}
+            </div>`);
+        alertList.append(el);
+        setTimeout(() => {
+            $(el).remove();
+        }, 2500);
+    }
+</script>

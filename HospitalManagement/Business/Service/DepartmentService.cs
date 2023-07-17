@@ -11,6 +11,19 @@ namespace HospitalManagement.Business.Service
             _departmentRepository = departmentRepository;
         }
 
+        public Department GetById(int id)
+        {
+            try
+            {
+                return _departmentRepository.GetById(id);
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
+
         public List<Department> LoadAll()
         {
             try

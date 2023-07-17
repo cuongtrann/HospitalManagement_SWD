@@ -13,6 +13,11 @@ namespace HospitalManagement.DataAccess.Repository
             _context = context;
         }
 
+        public Department GetById(int id)
+        {
+            return _context.Departments.Include(x => x.Assignments).Include(x => x.Appointments).FirstOrDefault(x => x.Id == id);
+        }
+
         public List<Department> LoadAll()
         {
             return _context.Departments.Include(x => x.Assignments).Include(x => x.Appointments).ToList();

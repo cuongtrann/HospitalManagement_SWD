@@ -5,5 +5,6 @@ namespace HospitalManagement.Business.IService
     public interface IAppointmentService
     {
         List<Appointment> LoadAll();
+        bool AddAppointment(Appointment appointment);
     }
 }
