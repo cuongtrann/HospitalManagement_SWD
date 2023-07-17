@@ -23,7 +23,7 @@ namespace HospitalManagement.Business.Service
             serviceRepository = new ServiceRepository(this.context);
         }
 
-        public void CreateInvoice(int examinationCardId)
+        public Invoice CreateInvoice(int examinationCardId, List<DataAccess.Models.Service> services)
         {
             Invoice invoice = new Invoice();
             invoice.MedicalExaminationCardId = examinationCardId;
@@ -33,7 +33,18 @@ namespace HospitalManagement.Business.Service
             invoice.PaymentMethod = "Credit Card";
 
             decimal? totalCost = 0;
-            List<InvoiceDetail> invoiceDetails = invoiceDetailRepository.GetInvoiceDetailsByExaminationCard(examinationCardId);
+
+            List<InvoiceDetail> invoiceDetails = new List<InvoiceDetail>();
+            services.ForEach(service =>
+            {
+                InvoiceDetail invoiceDetail = new InvoiceDetail();
+                invoiceDetail.ServiceId = service.Id;
+                invoiceDetail.MedicalExaminationCardId = examinationCardId;
+                invoiceDetails.Add(invoiceDetail);
+            });
+
+            invoiceDetailRepository.AddAll(invoiceDetails);
+
             invoiceDetails.ForEach(invoiceDetail =>
             {
                 var service = serviceRepository.GetService((int)invoiceDetail.ServiceId);
@@ -43,6 +54,7 @@ namespace HospitalManagement.Business.Service
             invoice.TotalCost = totalCost;
 
             invoiceRepository.CreateInvoice(invoice);
+            return invoice;
         }
     }
 }

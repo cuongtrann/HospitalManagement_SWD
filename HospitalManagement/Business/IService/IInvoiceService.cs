@@ -4,7 +4,7 @@ namespace HospitalManagement.Business.IService
 {
     public interface IInvoiceService
     {
-        void CreateInvoice(int examinationCardId);
+        Invoice CreateInvoice(int examinationCardId, List<DataAccess.Models.Service> services);
 
     }
 }

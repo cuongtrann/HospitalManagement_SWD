@@ -6,5 +6,9 @@ namespace HospitalManagement.DataAccess.IRepository
     {
         List<InvoiceDetail> GetInvoiceDetailsByExaminationCard(int examinationCardId);
 
+        void AddInvoiceDetail(InvoiceDetail invoiceDetail);
+
+        void AddAll(List<InvoiceDetail> invoiceDetails);
+
     }
 }

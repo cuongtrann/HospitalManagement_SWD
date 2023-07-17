@@ -29,8 +29,8 @@ builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
 builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
 builder.Services.AddSingleton<IPatientService, PatientService>();
 
-builder.Services.AddTransient<IExaminationCardService, ExaminationCardService>()
-    .AddDbContext<SWD392_DBContext>(opt => builder.Configuration.GetConnectionString("DBConntext"));
+builder.Services.AddSingleton<IExaminationCardService, ExaminationCardService>();
+builder.Services.AddSingleton<IInvoiceService, InvoiceService>();
 
 var app = builder.Build();
 
