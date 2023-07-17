@@ -109,7 +109,8 @@ namespace HospitalManagement.Pages.Recieptionist
                     _appointmentService.AddAppointment(new Appointment()
                     {
                         DepartmentId = depart.Id,
-                        PatientId = PatientId
+                        PatientId = PatientId,
+                        Status = 0
                     });
                     TempData["Message"] = "success";
                 }
