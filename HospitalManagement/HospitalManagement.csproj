@@ -14,11 +14,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Business\IService\" />
-    <Folder Include="Business\Service\" />
-    <Folder Include="DataAccess\IRepository\" />
-    <Folder Include="DataAccess\Repository\" />
-  </ItemGroup>
-
 </Project>

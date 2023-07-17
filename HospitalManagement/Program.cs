@@ -1,7 +1,28 @@
+using HospitalManagement.Business.IService;
+using HospitalManagement.Business.Service;
+using HospitalManagement.DataAccess.IRepository;
+using HospitalManagement.DataAccess.Models;
+using HospitalManagement.DataAccess.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddSingleton<SWD392_DBContext>();
+
+builder.Services.AddSingleton<IDiseaseRepository, DiseaseRepository>();
+builder.Services.AddSingleton<ISymptonRepository, SymptonRepository>();
+builder.Services.AddSingleton<IMedicalCardRepository, MedicalCardRepository>();
+builder.Services.AddSingleton<IMedicalRecordRepository, MedicalRecordRepository>();
+builder.Services.AddSingleton<IPatientRepository, PatientRepository>();
+builder.Services.AddSingleton<IPrescriptionRepository, PrescriptionRepository>();
+builder.Services.AddSingleton<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddSingleton<IInvoiceDetailRepository, InvoiceDetailRepository>();
+builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
+
+builder.Services.AddSingleton<IInvoiceService, InvoiceService>();
+
 
 var app = builder.Build();
 
