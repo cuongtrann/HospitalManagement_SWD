@@ -1,0 +1,39 @@
+﻿@page
+@using HospitalManagement.DataAccess.Models
+@model HospitalManagement.Pages.Common.ViewPatientProfileModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+
+}
+
+<div class="row">
+    <h2 class="col-md-10">PatientProfile List</h2>
+    <a href="/Recieptionist/CreatePatientProfile" class="col-md-2 btn btn-secondary">Create PatientProfile</a>
+</div>
+<table class="table table-striped mt-5">
+    <tr>
+        <th>ProfileID</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th style="width: 10%;">DOB</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>IdNo</th>
+        <th style="width: 20%;">Address</th>
+        <th>#</th>
+    </tr>
+    @foreach (Patient patient in @Model.patientList)
+    {
+        <tr>
+            <td>@patient.ProfileId</td>
+            <td>@patient.Profile.Name</td>
+            <td>@(patient.Profile.Gender.Value?"Female":"Male")</td>
+            <td>@(patient.Profile.Dob.HasValue?patient.Profile.Dob.Value.ToString("dd-MM-yyyy"):"")</td>
+            <td>@patient.Profile.Phone</td>
+            <td>@patient.Profile.Email</td>
+            <td>@patient.Profile.IdNo</td>
+            <td>@patient.Profile.Address</td>
+            <td><a href="/Common/UpdatePatientProfile?patientId=@patient.Id" class="btn btn-secondary">Update</a></td>
+        </tr>
+    }
+</table>

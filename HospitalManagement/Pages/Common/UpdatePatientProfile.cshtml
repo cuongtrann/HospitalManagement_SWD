@@ -1,0 +1,79 @@
+﻿@page
+@model HospitalManagement.Pages.Common.UpdatePatientProfileModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+
+}
+<style>
+    .title_create {
+        background: linear-gradient(45deg, #dee2e6, transparent);
+        padding: 10px;
+    }
+</style>
+<div>
+    <h2 class="title_create">Update PatienProfile</h2>
+    <hr style="width: 40%;margin-left: 750px;" />
+    <form class="p-4" method="post">
+        <input type="hidden" name="profileId" value="@Model.patientProfile.Id"></input>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">Name<span class="text-danger">*</span></span>
+            </div>
+            <input asp-for="@Model.patientProfile.Name" name="Name" type="text" class="form-control" placeholder="Name" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">Gender<span class="text-danger">*</span></span>
+            </div>
+            <div class="form-control">
+                <input name="Gender" value="0" class="form-check-input" type="radio" checked>
+                <label class="form-check-label">Male</label>
+                <input name="Gender" value="1" class="form-check-input" type="radio" @(Model.patientProfile.Gender.Value?"checked":"")>
+                <label class="form-check-label">Female</label>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">DOB<span class="text-danger">*</span></span>
+            </div>
+            <input asp-for="@Model.patientProfile.Dob" name="DOB" type="date" class="form-control" placeholder="Date of birth" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">Address</span>
+            </div>
+            <input asp-for="@Model.patientProfile.Address" name="Address" type="text" class="form-control" placeholder="Address">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">Phone<span class="text-danger">*</span></span>
+            </div>
+            <input asp-for="@Model.patientProfile.Phone" name="Phone" type="text" class="form-control" placeholder="Phone" required>
+            <span id="phoneError" style="color:red; display: none">Phone number is invalid!</span>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">IdNo</span>
+            </div>
+            <input asp-for="@Model.patientProfile.IdNo" name="IdNo" type="text" class="form-control" placeholder="ID number">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">Email</span>
+            </div>
+            <input asp-for="@Model.patientProfile.Email" name="Email" type="email" class="form-control" placeholder="Email">
+        </div>
+        <div style="text-align: center; padding: 15px">
+            <a href="/Common/ViewPatientProfile" class="btn btn-secondary w-25">CANCEL</a>
+            <button class="btn btn-success w-25">SAVE</button>
+        </div>
+    </form>
+</div>
+@if (Model.mess != null)
+{
+    <script>
+        alert("@Model.mess");
+    </script>
+}
