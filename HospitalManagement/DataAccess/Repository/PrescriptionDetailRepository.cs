@@ -12,6 +12,11 @@ namespace HospitalManagement.DataAccess.Repository
             this.context = context;
         }
 
+        public List<PrescriptionDetail> GetAllByPrescriptionId(int prescriptionDetailId)
+        {
+            return context.PrescriptionDetails.Where(p => p.PrescriptionId == prescriptionDetailId).ToList();
+        }
+
         public PrescriptionDetail GetPrescriptionDetail(int prescriptionDetailId)
         {
             PrescriptionDetail prescriptionDetail = context.PrescriptionDetails.FirstOrDefault(p =>  p.Id == prescriptionDetailId);

@@ -40,6 +40,9 @@ builder.Services.AddSingleton<IInvoiceService, InvoiceService>();
 builder.Services.AddSingleton<IExaminationCardRepository, ExaminationCardRepository>();
 builder.Services.AddSingleton<IProfileRepository, ProfileRepository>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<IPrescriptionDetailRepository, PrescriptionDetailRepository>();
+builder.Services.AddSingleton<IMedicationRepository, MedicationRepository>();
+
 
 
 var app = builder.Build();
