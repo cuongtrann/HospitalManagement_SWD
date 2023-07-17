@@ -36,3 +36,6 @@ wwwroot/lib/
 *.dtbcache.v2
 *.metadata.v6.1
 *.projects.v6.1
+
+# Ignore Figma cache files
+*.futdcache.v2
