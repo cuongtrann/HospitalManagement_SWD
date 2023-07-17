@@ -15,6 +15,21 @@ builder.Services.AddSingleton<IAppointmentService, AppointmentService>();
 builder.Services.AddSingleton<IAppointmentRepository, AppointmentRepository>();
 
 
+builder.Services.AddSingleton<SWD392_DBContext>();
+
+builder.Services.AddSingleton<IDiseaseRepository, DiseaseRepository>();
+builder.Services.AddSingleton<ISymptonRepository, SymptonRepository>();
+builder.Services.AddSingleton<IMedicalCardRepository, MedicalCardRepository>();
+builder.Services.AddSingleton<IMedicalRecordRepository, MedicalRecordRepository>();
+builder.Services.AddSingleton<IPatientRepository, PatientRepository>();
+builder.Services.AddSingleton<IPrescriptionRepository, PrescriptionRepository>();
+builder.Services.AddSingleton<IInvoiceRepository, InvoiceRepository>();
+builder.Services.AddSingleton<IInvoiceDetailRepository, InvoiceDetailRepository>();
+builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
+
+builder.Services.AddSingleton<IInvoiceService, InvoiceService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
