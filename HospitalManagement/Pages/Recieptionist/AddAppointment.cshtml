@@ -39,7 +39,7 @@
     }
 }
 <div class="row mt-3">
-    <div class="col-md-4 row">
+    <div class="col-md-6 row">
         <form asp-page-handler="Filter" method="get">
         <div class="input-group mb-3">
             
@@ -47,7 +47,8 @@
                 <div class="input-group-append">
                     <button id="searchButton" class="btn btn-outline-primary" type="submit">Search</button>
                 </div>
-            
+                <a class="btn btn-outline-primary mx-3" asp-page="./ViewAppointment"><i class="fa-regular fa-calendar-check mx-2"></i>View all appointment</a>
+
         </div>
         </form>
         <div class="input-group mb-3">

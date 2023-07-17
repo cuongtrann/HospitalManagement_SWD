@@ -36,11 +36,11 @@ namespace HospitalManagement.DataAccess.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                              .SetBasePath(Directory.GetCurrentDirectory())
-                              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-            IConfigurationRoot configuration = builder.Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("DBConntext"));
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server=LAPTOP-F3VHIUES; database =SWD392_DB;uid=sa;pwd=123456; Trusted_Connection=SSPI;Encrypt=false;TrustServerCertificate=true");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -54,6 +54,8 @@ namespace HospitalManagement.DataAccess.Models
                 entity.Property(e => e.DepartmentId).HasColumnName("department_id");
 
                 entity.Property(e => e.PatientId).HasColumnName("patient_id");
+
+                entity.Property(e => e.Status).HasColumnName("status");
 
                 entity.HasOne(d => d.Department)
                     .WithMany(p => p.Appointments)
@@ -102,7 +104,7 @@ namespace HospitalManagement.DataAccess.Models
                 entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Description)
-                    .HasMaxLength(100)
+                    .HasMaxLength(300)
                     .HasColumnName("description");
 
                 entity.Property(e => e.Name)
@@ -169,6 +171,12 @@ namespace HospitalManagement.DataAccess.Models
                 entity.Property(e => e.TotalCost)
                     .HasColumnType("money")
                     .HasColumnName("total_cost");
+
+                entity.HasOne(d => d.MedicalExaminationCard)
+                    .WithOne(p => p.Invoice)
+                    .HasForeignKey<Invoice>(d => d.MedicalExaminationCardId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Invoice_MedicalExaminationCard");
             });
 
             modelBuilder.Entity<InvoiceDetail>(entity =>
@@ -196,9 +204,7 @@ namespace HospitalManagement.DataAccess.Models
             {
                 entity.ToTable("MedicalExaminationCard");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.DiseaseId).HasColumnName("disease_id");
 
@@ -219,12 +225,6 @@ namespace HospitalManagement.DataAccess.Models
                     .WithMany(p => p.MedicalExaminationCards)
                     .HasForeignKey(d => d.DoctorId)
                     .HasConstraintName("FK_MedicalExaminationCard_User");
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.MedicalExaminationCard)
-                    .HasForeignKey<MedicalExaminationCard>(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MedicalExaminationCard_Invoice");
 
                 entity.HasOne(d => d.MedicalRecord)
                     .WithMany(p => p.MedicalExaminationCards)
