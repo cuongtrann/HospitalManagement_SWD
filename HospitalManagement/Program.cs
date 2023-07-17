@@ -6,6 +6,8 @@ using HospitalManagement.DataAccess.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddTransient<IPatientService, PatientService>().AddDbContext<SWD392_DBContext>(opt =>
+    builder.Configuration.GetConnectionString("SWD392_DBContext"));
 // Add services to the container.
 builder.Services.AddRazorPages();
 
