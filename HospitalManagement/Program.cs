@@ -6,8 +6,8 @@ using HospitalManagement.DataAccess.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddTransient<IPatientService, PatientService>().AddDbContext<SWD392_DBContext>(opt =>
-    builder.Configuration.GetConnectionString("SWD392_DBContext"));
+//builder.Services.AddTransient<IPatientService, PatientService>().AddDbContext<SWD392_DBContext>(opt =>
+    //builder.Configuration.GetConnectionString("SWD392_DBContext"));
 // Add services to the container.
 builder.Services.AddRazorPages();
 
@@ -22,8 +22,8 @@ builder.Services.AddSingleton<IPrescriptionRepository, PrescriptionRepository>()
 builder.Services.AddSingleton<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddSingleton<IInvoiceDetailRepository, InvoiceDetailRepository>();
 builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
-
-builder.Services.AddSingleton<IInvoiceService, InvoiceService>();
+builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
+builder.Services.AddSingleton<IPatientService, PatientService>();
 
 
 var app = builder.Build();
