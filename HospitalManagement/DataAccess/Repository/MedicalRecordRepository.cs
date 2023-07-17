@@ -18,10 +18,16 @@ namespace HospitalManagement.DataAccess.Repository
             context.SaveChanges();
         }
 
-
         public MedicalRecord GetByPatientId(int patientId)
         {
             return context.MedicalRecords.FirstOrDefault(m => m.PatientId == patientId);
+        }
+
+        public MedicalRecord GetMedicalRecord(int medicalRecordId)
+        {
+            MedicalRecord record = context.MedicalRecords.FirstOrDefault(m => m.Id == medicalRecordId);
+            return record;
+
         }
     }
 }

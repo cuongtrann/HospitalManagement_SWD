@@ -1,0 +1,22 @@
+﻿@page "/createmedicalcard/createinvoice/{medicalcardid}"
+@model HospitalManagement.Pages.MedicalExamination.CreateInvoiceModel
+@{
+}
+
+<div>
+    <h1>Create Invoice</h1>
+    <div class="p-3 border rounded-2">
+        <form method="post">
+            <div class="form-group mb-3">
+                <label for="services">Select multiple options:</label>
+                <select multiple class="form-control" id="services" name="services">
+                    @foreach(DataAccess.Models.Service service in Model.Services)
+                    {
+                        <option value="@service.Id">@service.Name</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
