@@ -1,0 +1,36 @@
+﻿@page
+@using HospitalManagement.DataAccess.Models;
+@model HospitalManagement.Pages.PrescriptionV.AddPrescriptionModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+
+}
+
+<div class="row">
+    <h2 class="col-md-10">Prescription List</h2>
+    <a href="/PrescriptionV/CreatePrescription" class="col-md-2 btn btn-secondary">Create Prescription</a>
+</div>
+<table class="table table-striped mt-5">
+    <tr>
+        <th>Prescription ID</th>
+        <th>Name</th>
+        <th>Doctor</th>
+        <th style="width: 10%;">Create At</th>
+        <th style="width: 20%;">Detail</th>
+        <th>#</th>
+    </tr>
+    @foreach (Prescription prescription in @Model.PrescriptionList)
+    {
+        var patient = @Model.PatientList.FirstOrDefault(p => p.Id == prescription.PatientId);
+        var doctor = @Model.UserList.FirstOrDefault(p => p.Id == prescription.DoctorId);
+        string patientName = patient != null ? patient.Profile.Name : "";
+        string doctorName = patient != null ? patient.Profile.Name : "";
+        <tr>
+            <td>@prescription.Id</td>
+            <td>@patientName</td>
+            <td>@doctorName</td>
+            <td>@(prescription.CreatedAt.HasValue ? prescription.CreatedAt.Value.ToString("dd-MM-yyyy") : "")</td>
+            <td><a href="/Common/UpdatePatientProfile?patientId=@prescription.Id" class="btn btn-secondary">View Detail</a></td>
+        </tr>
+    }
+</table>
