@@ -26,7 +26,12 @@ builder.Services.AddSingleton<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddSingleton<IInvoiceDetailRepository, InvoiceDetailRepository>();
 builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
 builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
+
+
 builder.Services.AddSingleton<IPatientService, PatientService>();
+builder.Services.AddSingleton<IInvoiceService, InvoiceService>();
+
+
 
 
 var app = builder.Build();

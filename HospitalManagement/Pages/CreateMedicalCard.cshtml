@@ -59,30 +59,30 @@
     {
         <button class="btn">Create New Medical Record</button>
     }
-      <form asp-page-handler="">
+      <form asp-page-handler="CreateMedicalCard" method="get">
           <label for="symptom">Symptom:</label>
-      <select id="symptom" name="symptom">
-        <option value="">--Select Symptom--</option>
-        <!-- loop to get symptoms -->
-        @foreach(Sympton s in Model.ListSympton)
-        {
-            <option value="@s.Id">@s.Name</option>
-        }
-      </select>
-      <label for="disease">Disease:</label>
-      <select id="disease" name="disease">
-        <option value="">--Select Disease--</option>
-        <!-- loop to get diseases -->
-        @foreach(Disease s in Model.ListDisease)
-        {
-            <option value="@s.Id">@s.Name</option>
-        }
-      </select>
-      <button class="btn">Create Prescription</button>
-      <button class="btn">Create Invoice</button>
-      <br/>
-      <br/>
-      <button type="submit" class="btn">Save Medical Examination Card</button>
+          <select id="symptom" name="symptom">
+            <option value="">--Select Symptom--</option>
+            <!-- loop to get symptoms -->
+            @foreach(Sympton s in Model.ListSympton)
+            {
+                <option asp-route-symptonId=@s.Id value="@s.Id">@s.Name</option>
+            }
+          </select>
+          <label for="disease">Disease:</label>
+          <select id="disease" name="disease">
+            <option value="">--Select Disease--</option>
+            <!-- loop to get diseases -->
+            @foreach(Disease s in Model.ListDisease)
+            {
+                <option asp-route-diseaseId=@s.Id value="@s.Id">@s.Name</option>
+            }
+          </select>
+          <button class="btn">Create Prescription</button>
+          <button class="btn">Create Invoice</button>
+          <br/>
+          <br/>
+          <button type="submit" class="btn">Save Medical Examination Card</button>
       </form>
       
       
