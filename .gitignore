@@ -32,3 +32,7 @@ wwwroot/lib/
 # Ignore Visual Studio index files
 *.vsidx
 
+# Ignore Visual Studio cache and project files
+*.dtbcache.v2
+*.metadata.v6.1
+*.projects.v6.1
