@@ -18,9 +18,9 @@ namespace HospitalManagement.Business.Service
         public InvoiceService(SWD392_DBContext context)
         {
             this.context = context;
-            invoiceRepository = new InvoiceRepository(context);
-            invoiceDetailRepository = new InvoiceDetailRepository(context);
-            serviceRepository = new ServiceRepository(context);
+            invoiceRepository = new InvoiceRepository(this.context);
+            invoiceDetailRepository = new InvoiceDetailRepository(this.context);
+            serviceRepository = new ServiceRepository(this.context);
         }
 
         public void CreateInvoice(int examinationCardId)

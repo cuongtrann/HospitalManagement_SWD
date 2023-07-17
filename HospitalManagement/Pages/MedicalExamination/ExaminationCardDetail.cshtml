@@ -1,6 +1,7 @@
 ﻿@page "/examinations/{id?}"
 @model HospitalManagement.Pages.MedicalExamination.ExaminationCardDetailModel
 @{
+    var examinationCard = Model.MedicalExaminationCard;
 }
 
 <div >
@@ -16,7 +17,7 @@
                     <h4>Doctor Information:</h4>
                     <div>
                         <span>Doctor: </span>
-                        <span>Kien Vu</span>
+                        <span>@examinationCard.Doctor.Profile.Name</span>
                     </div>
                     <div>
                         <span>Phone: </span>

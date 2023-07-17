@@ -3,6 +3,7 @@ using HospitalManagement.Business.Service;
 using HospitalManagement.DataAccess.IRepository;
 using HospitalManagement.DataAccess.Models;
 using HospitalManagement.DataAccess.Repository;
+using HospitalManagement.DataAccess.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,8 @@ builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
 builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
 builder.Services.AddSingleton<IPatientService, PatientService>();
 
+builder.Services.AddTransient<IExaminationCardService, ExaminationCardService>()
+    .AddDbContext<SWD392_DBContext>(opt => builder.Configuration.GetConnectionString("DBConntext"));
 
 var app = builder.Build();
 

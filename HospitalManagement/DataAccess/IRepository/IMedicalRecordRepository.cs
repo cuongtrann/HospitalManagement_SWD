@@ -1,4 +1,5 @@
 ﻿using HospitalManagement.DataAccess.Models;
+
 namespace HospitalManagement.DataAccess.IRepository
 {
     public interface IMedicalRecordRepository
@@ -6,5 +7,8 @@ namespace HospitalManagement.DataAccess.IRepository
         MedicalRecord GetByPatientId(int patientId);
 
         void Create(MedicalRecord record);  
+
+        MedicalRecord GetMedicalRecord(int medicalRecordId);
+
     }
 }
