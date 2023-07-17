@@ -12,10 +12,14 @@ namespace HospitalManagement.DataAccess.Repository
             this.context = context;
         }
 
-        public Sympton GetSympton(int symptonId)
+        public List<Sympton> GetAll()
         {
-            Sympton sympton = context.Symptons.FirstOrDefault(s => s.Id == symptonId);
-            return sympton;
+            return context.Symptons.ToList();
+        }
+
+        public Sympton GetById(int id)
+        {
+            return context.Symptons.FirstOrDefault(s => s.Id == id);    
         }
     }
 }
