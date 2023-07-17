@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HospitalManagement.Pages.MedicalExaminationCard
+namespace HospitalManagement.Pages.MedicalExamination
 {
     public class ExaminationCardDetailModel : PageModel
     {

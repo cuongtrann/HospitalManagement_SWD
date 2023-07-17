@@ -12,6 +12,6 @@ namespace HospitalManagement.DataAccess.Models
         public bool? Status { get; set; }
         public string? PaymentMethod { get; set; }
 
-        public virtual MedicalExaminationCard? MedicalExaminationCard { get; set; }
+        public virtual MedicalExaminationCard MedicalExaminationCard { get; set; } = null!;
     }
 }

@@ -24,6 +24,10 @@ namespace HospitalManagement.Pages.Recieptionist
         public int TotalPage { get; set; }
         public int CurrentPage { get; set; }
         private static readonly int _pageSize = 5;
+        [BindProperty]
+        public int? DepartmentId { get; set; }
+        [BindProperty]
+        public int? PatientId { get; set; }
         public AddAppointmentModel(IDepartmentService departmentService, IAppointmentService appointmentService)
         {
             _departmentService = departmentService;
@@ -32,34 +36,25 @@ namespace HospitalManagement.Pages.Recieptionist
 
         public void OnGet()
         {
-            OnGetFilter(string.Empty,currentPage);
-        }
-        private void LoadDataBegin()
-        {
-            SWD392_DBContext sWD392_DBContext = new SWD392_DBContext();
-            Departments = _departmentService.LoadAll();
-            // Sua lai them phan cua Mai sau
-            
-            Patients = Patients.Skip(0).Take(10).ToList();
-            CurrentPage = 1;
+            OnGetFilter(_keyword,currentPage);
         }
 
         public IActionResult OnGetFilter(string? sortOption, int id)
         {
             // Sua lai them phan cua Mai sau
-            
-            
-            
             SWD392_DBContext sWD392_DBContext = new SWD392_DBContext();
             Patients = sWD392_DBContext.Patients.Include(x => x.Profile).ToList();
-
-            // Lọc danh sách sản phẩm theo các giá trị của các filter
-            if (!string.IsNullOrEmpty(KeyWord))
+            if (KeyWord != null)
             {
-                KeyWord = KeyWord.Trim().ToLower();
-                Patients = Patients.Where(p => p.Profile.Name.ToLower().Contains(KeyWord) 
-                || p.Profile.IdNo.ToLower().Contains(KeyWord) || p.Profile.Phone.Contains(KeyWord) 
-                || p.Profile.Email.ToLower().Contains(KeyWord) || p.Profile.Address.ToLower().Contains(KeyWord)).ToList();
+                _keyword = KeyWord;
+            }
+            // Lọc danh sách sản phẩm theo các giá trị của các filter
+            if (!string.IsNullOrEmpty(_keyword))
+            {
+                _keyword = _keyword.Trim().ToLower();
+                Patients = Patients.Where(p => p.Profile.Name.ToLower().Contains(_keyword) 
+                || p.Profile.IdNo.ToLower().Contains(_keyword) || p.Profile.Phone.Contains(_keyword) 
+                || p.Profile.Email.ToLower().Contains(_keyword) || p.Profile.Address.ToLower().Contains(_keyword)).ToList();
             }
 
             //if (!string.IsNullOrEmpty(sortOption))
@@ -87,14 +82,39 @@ namespace HospitalManagement.Pages.Recieptionist
             PatientsPerPage = Patients.Skip(startIndex).Take(_pageSize).ToList();
 
             // Tính toán thông tin phân trang
-            _keyword = KeyWord;
-            this.KeyWord = _keyword;
+            KeyWord = _keyword;
             totalPage = (int)Math.Ceiling((double)Patients.Count() / _pageSize);
             TotalPage = totalPage;
             currentPage = id;
             CurrentPage = currentPage;
             Departments = _departmentService.LoadAll();
             return Page();
+        }
+
+        public IActionResult OnPostAddAppointment()
+        {
+            if (DepartmentId != null && PatientId != null)
+            {
+                Department depart = _departmentService.GetById((int)DepartmentId);
+                if(depart != null)
+                {
+                    var now = DateTime.Now;
+                    var assignments = depart.Assignments
+                    .Where(a => a.From <= now && now <= a.To)
+                    .ToList();
+                    if(assignments.Count == 0) {
+                        TempData["Message"] = "fail";
+                        return OnGetFilter(_keyword, currentPage);
+                    }
+                    _appointmentService.AddAppointment(new Appointment()
+                    {
+                        DepartmentId = depart.Id,
+                        PatientId = PatientId
+                    });
+                    TempData["Message"] = "success";
+                }
+            }
+            return OnGetFilter(_keyword, currentPage);
         }
     }
 }

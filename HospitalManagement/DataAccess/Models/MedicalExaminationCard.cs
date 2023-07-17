@@ -20,10 +20,10 @@ namespace HospitalManagement.DataAccess.Models
 
         public virtual Disease? Disease { get; set; }
         public virtual User? Doctor { get; set; }
-        public virtual Invoice IdNavigation { get; set; } = null!;
         public virtual MedicalRecord? MedicalRecord { get; set; }
         public virtual Prescription? Prescription { get; set; }
         public virtual Sympton? Sympton { get; set; }
+        public virtual Invoice? Invoice { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual ICollection<PatientExamTest> PatientExamTests { get; set; }
     }

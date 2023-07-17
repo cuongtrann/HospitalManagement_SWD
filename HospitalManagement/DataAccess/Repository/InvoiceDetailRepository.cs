@@ -13,6 +13,21 @@ namespace HospitalManagement.DataAccess.Repository
             this.context = context;
         }
 
+        public void AddAll(List<InvoiceDetail> invoiceDetails)
+        {
+            invoiceDetails.ForEach(invoiceDetail =>
+            {
+                context.Add(invoiceDetail);
+            });
+            context.SaveChanges();
+        }
+
+        public void AddInvoiceDetail(InvoiceDetail invoiceDetail)
+        {
+            context.Add(invoiceDetail);
+            context.SaveChanges();
+        }
+
         public List<InvoiceDetail> GetInvoiceDetailsByExaminationCard(int examinationCardId)
         {
             List<InvoiceDetail> invoiceDetails 

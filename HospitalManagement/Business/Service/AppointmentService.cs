@@ -13,6 +13,18 @@ namespace HospitalManagement.Business.Service
             _appointmentRepository = appointmentRepository;
         }
 
+        public bool AddAppointment(Appointment appointment)
+        {
+            try
+            {
+                return _appointmentRepository.AddAppointment(appointment);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public List<Appointment> LoadAll()
         {
             throw new NotImplementedException();

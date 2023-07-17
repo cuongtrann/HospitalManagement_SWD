@@ -12,6 +12,12 @@ namespace HospitalManagement.DataAccess.Repository
             this.context = context;
         }
 
+        public List<Service> GetAllServices()
+        {
+            List<Service> services = context.Services.ToList();
+            return services;
+        }
+
         public Service GetService(int serviceId)
         {
             Service service = context.Services.FirstOrDefault(s => s.Id == serviceId);

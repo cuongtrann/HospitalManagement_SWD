@@ -3,6 +3,7 @@ using HospitalManagement.Business.Service;
 using HospitalManagement.DataAccess.IRepository;
 using HospitalManagement.DataAccess.Models;
 using HospitalManagement.DataAccess.Repository;
+using HospitalManagement.DataAccess.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,9 +28,15 @@ builder.Services.AddSingleton<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddSingleton<IInvoiceDetailRepository, InvoiceDetailRepository>();
 builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
 builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
+
+
 builder.Services.AddSingleton<IPatientService, PatientService>();
+builder.Services.AddSingleton<IInvoiceService, InvoiceService>();
 
 
+
+builder.Services.AddSingleton<IExaminationCardService, ExaminationCardService>();
+builder.Services.AddSingleton<IInvoiceService, InvoiceService>();
 
 var app = builder.Build();
 
