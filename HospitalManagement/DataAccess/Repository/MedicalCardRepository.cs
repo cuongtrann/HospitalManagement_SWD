@@ -3,18 +3,18 @@ using HospitalManagement.DataAccess.Models;
 
 namespace HospitalManagement.DataAccess.Repository
 {
-    public class PrescriptionRepository : IPrescriptionRepository
+    public class MedicalCardRepository : IMedicalCardRepository
     {
         SWD392_DBContext context;
 
-        public PrescriptionRepository(SWD392_DBContext context)
+        public MedicalCardRepository(SWD392_DBContext context)
         {
             this.context = context;
         }
 
-        public void Create(Prescription prescription)
+        public void Create(MedicalExaminationCard card)
         {
-            context.Prescriptions.Add(prescription);
+            context.MedicalExaminationCards.Add(card);
             context.SaveChanges();
         }
     }

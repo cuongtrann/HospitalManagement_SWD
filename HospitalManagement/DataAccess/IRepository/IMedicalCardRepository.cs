@@ -2,10 +2,8 @@
 
 namespace HospitalManagement.DataAccess.IRepository
 {
-    public interface ISymptonRepository
+    public interface IMedicalCardRepository
     {
-        List<Sympton> GetAll();
-
-        Sympton GetById(int id);
+        void Create(MedicalExaminationCard card);
     }
 }

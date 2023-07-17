@@ -4,6 +4,8 @@ namespace HospitalManagement.DataAccess.IRepository
 {
     public interface IDiseaseRepository
     {
-        Disease GetDisease(int diseaseId);
+        List<Disease> GetAll();
+
+        Disease GetById(int id);
     }
 }
