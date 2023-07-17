@@ -1,0 +1,88 @@
+﻿@page
+@using HospitalManagement.DataAccess.Models
+@model HospitalManagement.Pages.PrescriptionV.CreatePrescriptionModel
+@{
+}
+<style>
+      
+      h1 {
+        text-align: center;
+        margin-top: 0;
+        font-size:20px;
+        font-weight:bold
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+      select {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        font-size: 16px;
+        font-family: inherit;
+      }
+      .btn {
+        background-color: #003366;
+        color: white;
+        padding: 10px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .btn:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+
+<title>Create new Prescription</title>
+    
+  
+  
+    <div class="container">
+    <h1 style="font-size:50px, larger">Create new Prescription</h1>
+      <label style="font-size:30px, larger" for="patientName">Patient Name:</label>
+      @*<input type="text" id="patientName" name="patientName" value="@Model.Patient.Profile.Name"/>*@
+    <label for="medicalRecord">Prescription:</label>
+    @*@if (Model.MedicalRecord != null)
+    {
+        <p>@Model.MedicalRecord.FamilyHistory</p>
+
+    } else
+    {
+        <button class="btn">Create New Medical Record</button>
+    }
+      <form asp-page-handler="">
+          <label for="symptom">Symptom:</label>
+      <select id="symptom" name="symptom">
+        <option value="">--Select Symptom--</option>
+        <!-- loop to get symptoms -->
+        @foreach(Sympton s in Model.ListSympton)
+        {
+            <option value="@s.Id">@s.Name</option>
+        }
+      </select>
+      <label for="disease">Disease:</label>
+      <select id="disease" name="disease">
+        <option value="">--Select Disease--</option>
+        <!-- loop to get diseases -->
+        @foreach(Disease s in Model.ListDisease)
+        {
+            <option value="@s.Id">@s.Name</option>
+        }
+      </select>
+      <button class="btn">Create Prescription</button>
+      <button class="btn">Create Invoice</button>
+      <br/>
+      <br/>
+      <button type="submit" class="btn">Save Medical Examination Card</button>
+      </form>
+      *@
+      
+    </div>

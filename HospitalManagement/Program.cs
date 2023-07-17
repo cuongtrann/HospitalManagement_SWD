@@ -14,6 +14,7 @@ builder.Services.AddSingleton<IAppointmentService, AppointmentService>();
 builder.Services.AddSingleton<IAppointmentRepository, AppointmentRepository>();
 
 
+
 builder.Services.AddSingleton<SWD392_DBContext>();
 
 builder.Services.AddSingleton<IDiseaseRepository, DiseaseRepository>();
@@ -27,6 +28,7 @@ builder.Services.AddSingleton<IInvoiceDetailRepository, InvoiceDetailRepository>
 builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
 builder.Services.AddSingleton<IServiceRepository, ServiceRepository>();
 builder.Services.AddSingleton<IPatientService, PatientService>();
+
 
 
 var app = builder.Build();
