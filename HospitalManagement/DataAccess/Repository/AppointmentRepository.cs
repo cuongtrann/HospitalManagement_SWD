@@ -31,5 +31,21 @@ namespace HospitalManagement.DataAccess.Repository
         {
             return _context.Appointments.Include(x => x.Department).Include(x=>x.Patient).Include(x => x.Patient.Profile).ToList();
         }
+
+        public bool updateStatus(int? appointmentId, int? appointmentStatus)
+        {
+            try
+            {
+                Appointment appointment = _context.Appointments.FirstOrDefault(x => x.Id == appointmentId);
+                appointment.Status = appointmentStatus;
+                _context.Appointments.Update(appointment);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

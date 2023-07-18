@@ -36,5 +36,23 @@ namespace HospitalManagement.Business.Service
                 return null;
             }
         }
+
+        public bool updateStatus(int? appointmentId, int? appointmentStatus)
+        {
+            try
+            {
+                if(appointmentId != null && appointmentStatus != null) {
+                    return _appointmentRepository.updateStatus(appointmentId, appointmentStatus);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

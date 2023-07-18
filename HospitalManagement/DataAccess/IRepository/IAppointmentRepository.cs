@@ -6,5 +6,6 @@ namespace HospitalManagement.DataAccess.IRepository
     {
         bool AddAppointment(Appointment appointment);
         List<Appointment> LoadAll();
+        bool updateStatus(int? appointmentId, int? appointmentStatus);
     }
 }

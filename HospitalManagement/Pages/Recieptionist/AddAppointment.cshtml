@@ -52,19 +52,28 @@
         </div>
         </form>
         <div class="input-group mb-3">
-            <div>
-                <select class="form-control" id="sortSelect">
-                    <option>Sort by default</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                    <option>Option 4</option>
-                    <option>Option 5</option>
+            <form asp-page-handler="Filter" method="get" id="selectSortForm">
+                <select class="form-control" onchange="submitSelectSortForm()" asp-for="SortOption">
+                    <option value="0">Sort by default</option>
+                    <option value="1">Sort by name asc</option>
+                    <option value="2">Sort by name desc</option>
+                    <option value="3">Sort by date of birth</option>
+                    <option value="4">Sort by date of birth</option>
                 </select>
-            </div>
+            </form>
+
+            <form class="mx-3" asp-page-handler="Filter" method="get" id="selectGenderForm">
+                <select class="form-control" onchange="submitSelectGenderForm()" asp-for="GenderOption">
+                    <option value="0">All gender</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                </select>
+            </form>
+            <a class="btn btn-outline-primary" asp-page-handler="Refresh">Refresh</a>
         </div>
     </div>
     <div>
-        <button class="btn btn-outline-primary float-end" style="margin-right:70px"><i class="fa-solid fa-user-plus fa-beat mx-2"></i>Add new patient</button>
+        <a asp-page="./CreatePatientProfile" class="btn btn-outline-primary float-end"><i class="fa-solid fa-user-plus fa-beat mx-2"></i>Add new patient</a>
     </div>
     <div class="row mt-3">
         <table class="table table-hover">
@@ -159,6 +168,15 @@
         }else{
             form.submit();
         }
+    }
+
+    function submitSelectSortForm() {
+        var form = document.getElementById('selectSortForm');
+        form.submit();
+    }
+    function submitSelectGenderForm() {
+        var form = document.getElementById('selectGenderForm');
+        form.submit();
     }
 
     function ShowAlert(attr, mess) {
