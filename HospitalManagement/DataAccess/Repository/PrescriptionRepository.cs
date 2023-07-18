@@ -24,6 +24,11 @@ namespace HospitalManagement.DataAccess.Repository
             return context.Prescriptions.ToList();
         }
 
+        public List<Profile> GetAllProfile()
+        {
+            return context.Profiles.ToList();
+        }
+
         public List<User> GetAllUser()
         {
             return context.Users.ToList();
@@ -37,6 +42,7 @@ namespace HospitalManagement.DataAccess.Repository
         public Prescription GetByIdentifyNumber(string idNo)
         {
             throw new NotImplementedException();
+
         }
     }
 }

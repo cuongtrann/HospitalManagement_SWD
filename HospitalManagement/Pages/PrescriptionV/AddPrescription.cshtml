@@ -30,7 +30,7 @@
             <td>@patientName</td>
             <td>@doctorName</td>
             <td>@(prescription.CreatedAt.HasValue ? prescription.CreatedAt.Value.ToString("dd-MM-yyyy") : "")</td>
-            <td><a href="/Common/UpdatePatientProfile?patientId=@prescription.Id" class="btn btn-secondary">View Detail</a></td>
+            <td><a href="/PrescriptionV/ViewPrescription?id=@prescription.Id" class="btn btn-secondary">View Detail</a></td>
         </tr>
     }
 </table>
