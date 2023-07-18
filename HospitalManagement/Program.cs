@@ -22,6 +22,7 @@ builder.Services.AddSingleton<IDiseaseRepository, DiseaseRepository>();
 builder.Services.AddSingleton<ISymptonRepository, SymptonRepository>();
 builder.Services.AddSingleton<IMedicalCardRepository, MedicalCardRepository>();
 builder.Services.AddSingleton<IMedicalRecordRepository, MedicalRecordRepository>();
+builder.Services.AddSingleton<IMedicationRepository, MedicationRepository>();
 builder.Services.AddSingleton<IPatientRepository, PatientRepository>();
 builder.Services.AddSingleton<IPrescriptionRepository, PrescriptionRepository>();
 builder.Services.AddSingleton<IInvoiceRepository, InvoiceRepository>();

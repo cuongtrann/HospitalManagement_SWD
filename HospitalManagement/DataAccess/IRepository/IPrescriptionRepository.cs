@@ -9,5 +9,6 @@ namespace HospitalManagement.DataAccess.IRepository
         Prescription GetByIdentifyNumber(string idNo);
         public List<Prescription> GetAll();
         public List<User> GetAllUser();
+        public List<Profile> GetAllProfile();
     }
 }

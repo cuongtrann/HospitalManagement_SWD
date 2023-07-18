@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.DataAccess.IRepository;
 using HospitalManagement.DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HospitalManagement.DataAccess.Repository
 {
@@ -10,6 +11,11 @@ namespace HospitalManagement.DataAccess.Repository
         public MedicationRepository(SWD392_DBContext context)
         {
             this.context = context;
+        }
+
+        public List<Medication> GetAll()
+        {
+            return context.Medications.ToList();
         }
 
         public Medication GetMedication(int medicationId)
