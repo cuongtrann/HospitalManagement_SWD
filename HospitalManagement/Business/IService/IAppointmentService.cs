@@ -6,5 +6,6 @@ namespace HospitalManagement.Business.IService
     {
         List<Appointment> LoadAll();
         bool AddAppointment(Appointment appointment);
+        bool updateStatus(int? appointmentId, int? appointmentStatus);
     }
 }
