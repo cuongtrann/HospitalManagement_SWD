@@ -42,6 +42,7 @@ namespace HospitalManagement.DataAccess.Repository
         public Prescription GetByIdentifyNumber(string idNo)
         {
             throw new NotImplementedException();
+
         }
     }
 }

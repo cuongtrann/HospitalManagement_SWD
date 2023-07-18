@@ -1,4 +1,5 @@
 ﻿@page "/examinations/{id?}"
+@using HospitalManagement.DataAccess.Models
 @model HospitalManagement.Pages.MedicalExamination.ExaminationCardDetailModel
 @{
     
@@ -17,41 +18,41 @@
                     <h4>Doctor Information:</h4>
                     <div>
                         <span>Doctor: </span>
-                        <span>Kien</span>
+                        <span>@Model.ProfileDoctor.Name</span>
                     </div>
                     <div>
                         <span>Phone: </span>
-                        <span>0123456789</span>
+                        <span>@Model.ProfileDoctor.Phone</span>
                     </div><div>
                         <span>Email: </span>
-                        <span>email@gmail.com</span>
+                        <span>@Model.ProfileDoctor.Email</span>
                     </div>
                 </div>
                 <div>
                     <h4>Patient Information:</h4>
                     <div>
                         <span>Full name: </span>
-                        <span>Kien Vu</span>
+                        <span>@Model.ProfilePatient.Name</span>
                     </div>
                     <div>
                         <span>Phone: </span>
-                        <span>0123456789</span>
+                        <span>@Model.ProfilePatient.Phone</span>
                     </div>
                     <div>
                         <span>Email: </span>
-                        <span>email@gmail.com</span>
+                        <span>@Model.ProfilePatient.Email</span>
                     </div>
                     <div>
                         <span>Address: </span>
-                        <span>Dia chi nha benh nhan</span>
+                        <span>@Model.ProfilePatient.Address</span>
                     </div>
                     <div>
                         <span>Medical history: </span>
-                        <p class="ms-3">Tien su benh ghi o day</p>
+                        <p class="ms-3">@Model.MedicalRecord.MedicalHistory</p>
                     </div>
                     <div>
                         <span>Family history: </span>
-                        <p class="ms-3">Tien su gia dinh ghi o day</p>
+                        <p class="ms-3">@Model.MedicalRecord.FamilyHistory</p>
                     </div>
                 </div>
             </div>
@@ -60,34 +61,36 @@
                     <h4>Examination:</h4>
                     <div>
                         <span>Symptoms: </span>
-                        <span>Trieu chung cua benh nhan</span>
+                        <span>@Model.Sympton.Name</span>
                     </div>
                     <div>
                         <span>Disease: </span>
-                        <span>Ten benh</span>
+                        <span>@Model.Disease.Name</span>
                     </div>
                     <div>
                         <span>Cause: </span>
-                        <span>Nguyen nhan gay benh</span>
+                        <span>@Model.Disease.Cause</span>
                     </div>
                     <div>
                         <span>Treatment: </span>
-                        <span>Phuong phap dieu tri</span>
+                        <span>@Model.Disease.Treatment</span>
                     </div>
                     <div>
                         <span>Prevention: </span>
-                        <span>Cach phong chong</span>
+                        <span>@Model.Disease.Prevention</span>
                     </div>
                     <div>
                         <span>Complication: </span>
-                        <span>Bien chung cua benh</span>
+                        <span>@Model.Disease.Complication</span>
                     </div>
                 </div>
                 <div>
                     <h4>Prescirption:</h4>
                     <ul class="list-group">
-                        <li class="list-group-item"><a href="" class="link-dark">Ten thuoc</a></li>
-                        <li class="list-group-item"><a href="" class="link-dark">Ten thuoc</a></li>
+                        @foreach(Medication m in Model.Medications)
+                        {
+                            <li class="list-group-item"><a href="" class="link-dark">@m.Name</a></li>
+                        }
                     </ul>
                 </div>
             </div>

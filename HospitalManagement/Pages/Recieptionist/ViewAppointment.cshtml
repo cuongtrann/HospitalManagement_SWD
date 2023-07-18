@@ -1,17 +1,20 @@
 ﻿@page
-@model HospitalManagement.Pages.Recieptionist.AddAppointmentModel
+@model HospitalManagement.Pages.Recieptionist.ViewAppointmentModel
 @{
 }
 <h1><i class="fa-regular fa-calendar-check mx-2"></i>Appointment Management</h1>
 <div class="card w-1"></div>
 <div class="row mt-3">
     <div class="col-md-4">
-        <form>
+        <form asp-page-handler="Filter" method="get">
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search">
+
+                <input asp-for="@Model.KeyWord" name="keyword" id="patientSearch" type="text" class="form-control" placeholder="Search patient">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                    <button id="searchButton" class="btn btn-outline-primary" type="submit">Search</button>
                 </div>
+                <a class="btn btn-outline-primary mx-3" asp-page="./ViewAppointment"><i class="fa-regular fa-calendar-check mx-2"></i>View all appointment</a>
+
             </div>
         </form>
         <div class="input-group mb-3">
@@ -25,13 +28,15 @@
                 </select>
             </div>
             <div class="mx-4">
-                <select class="form-control" id="department">
-                    <option>Sort by default</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
-                    <option>Option 4</option>
-                    <option>Option 5</option>
-                </select>
+                <form asp-page-handler="Filter">
+                    <select onchange="submitForm()" asp-for="@Model.DepartmentId" class="form-control" id="departmentSelect">
+                        <option value="0">Select department</option>
+                        @foreach (var depart in Model.Departments)
+                        {
+                            <option value="@depart.Id">@depart.Name</option>
+                        }
+                    </select>
+                </form>
             </div>
         </div>
         
@@ -51,36 +56,50 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Address</th>
-                    <th>Doctor</th>
                     <th>Status</th>
 
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>Male</td>
-                    <td>09289298911</td>
-                    <td>25/10/2002</td>
-                    <td>093213211</td>
-                    <td>cuong@gmail.com</td>
-                    <td>Ha Noi</td>
-                    <td>Tran Ngoc Cuong</td>
-                    <td><p class="text-warning">Not done</p></td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>Male</td>
-                    <td>09289298911</td>
-                    <td>25/10/2002</td>
-                    <td>093213211</td>
-                    <td>cuong@gmail.com</td>
-                    <td>Ha Noi</td>
-                    <td>Tran Ngoc Cuong</td>
-                    <td><p class="text-success">Done</p></td>
-                </tr>
+                @{
+                    int i = (Model.CurrentPage - 1) * 5 + 1;
+                }
+
+                @foreach (var appointment in Model.AppointmentsPerPage)
+                {
+                    string gender = (bool)appointment.Patient.Profile.Gender ? "Male" : "Female";
+                    string dobStr = appointment.Patient.Profile.Dob?.ToString("dd/MM/yyyy");
+                    <tr>
+                        <td>@i</td>
+                        <td>@appointment.Patient.Profile.Name</td>
+                        <td>@gender</td>
+                        <td>@appointment.Patient.Profile.IdNo</td>
+                        <td>@dobStr</td>
+                        <td>@appointment.Patient.Profile.Phone</td>
+                        <td>@appointment.Patient.Profile.Email</td>
+                        <td>@appointment.Patient.Profile.Address</td>
+                        <form>
+                        @if(appointment.Status == 0)
+                        {
+                                <select asp-for="@Model.AppointmentStatus" class="form-control" id="@i departmentSelect">
+                                    <option value="0"><p>Not started</p></option>
+                                    <option value="1"><p class="text-warning">In progress</p></option>
+                                </select>
+                        }else if(appointment.Status == 1)
+                        {
+                                <select asp-for="@Model.AppointmentStatus" class="form-control" id="@i departmentSelect">
+                                    <option value="0"><p class="text-warning">In progress</p></option>
+                                    <option value="2"><p class="text-success">Complete</p></option>
+                                </select>
+                        }
+                        else
+                        {
+                            <td><p>@appointment.Status</p></td>
+                        }
+                        </form>
+                    </tr>
+                    i++;
+                }
             </tbody>
         </table>
         <div class="px-5">

@@ -1,5 +1,6 @@
 ﻿using HospitalManagement.DataAccess.IRepository;
 using HospitalManagement.DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HospitalManagement.DataAccess.Repository
 {
@@ -28,7 +29,7 @@ namespace HospitalManagement.DataAccess.Repository
 
         public List<Appointment> LoadAll()
         {
-            throw new NotImplementedException();
+            return _context.Appointments.Include(x => x.Department).Include(x=>x.Patient).Include(x => x.Patient.Profile).ToList();
         }
     }
 }

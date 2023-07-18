@@ -27,7 +27,14 @@ namespace HospitalManagement.Business.Service
 
         public List<Appointment> LoadAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _appointmentRepository.LoadAll();
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }
