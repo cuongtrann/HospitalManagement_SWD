@@ -48,9 +48,9 @@
   
     <div class="container">
       <h1 style="font-size:50px, larger">Create new medical examination card</h1>
-      <label style="font-size:30px, larger" for="patientName">Patient Name:</label>
+      <label style="font-size:30px, larger" >Patient Name:</label>
       <input type="text" id="patientName" name="patientName" value="@Model.Patient.Profile.Name"/>
-      <label for="medicalRecord">Medical Record:</label>
+      <label >Medical Record:</label>
     @if (Model.MedicalRecord != null)
     {
         <p>@Model.MedicalRecord.FamilyHistory</p>
@@ -61,17 +61,16 @@
     }
 
     <div id="CreateNewRecord" style="display:none">
-        <h3>Create New Medical Record</h3>
-        <label for="medicalRecord">Medical History:</label>
+        <label >Medical History:</label>
         <input type="text" id="MedicalHistory"/>
-        <label for="medicalRecord">Family History:</label>
+        <label >Family History:</label>
         <input type="text" id="FamilyHistory"/>
         <button class="btn" id="CreateRecord">Create</button>
-        <p style="color:green;display:none" id="NotiSuccess"> Create new medical record success </p>
+        <p style="color:green" id="NotiSuccess"> Create new medical record success </p>
     </div>
 
       <form asp-page-handler="CreateMedicalCard" method="post">
-          <label for="symptom">Symptom:</label>
+          <label >Symptom:</label>
           <select id="symptom" name="sympton" asp-for="Sympton">
             <option value="0">--Select Symptom--</option>
             <!-- loop to get symptoms -->
@@ -80,7 +79,7 @@
                 <option value="@s.Id">@s.Name</option>
             }
           </select>
-          <label for="disease">Disease:</label>
+          <label >Disease:</label>
           <select id="disease" name="disease" asp-for="Disease">
             <option value="0">--Select Disease--</option>
             <!-- loop to get diseases -->
@@ -103,15 +102,19 @@
     $(document).on('click', "#ShowFormRecord", function (event) {
         $('#CreateNewRecord').show();
         $('#ShowFormRecord').hide();
+        $('NotiSuccess').hide();
     });
 
     $(document).on('click', "#CreateRecord", function (event) {
         var medicalHis = $('#MedicalHistory').val();
         var familyHis = $('#FamilyHistory').val();
+        console.log(medicalHis);
+        console.log(familyHis);
         $.ajax({
-        method: "POST",
+        method: "GET",
         url: "/CreateMedicalCard?handler=createMedicalRecord",
-        data: {medicalHistory : medicalHis, familyHistory : familyHis},
+        data: {medicalHistory : medicalHis, 
+            familyHistory : familyHis},
         success: function(data) {
           console.log("Create new medical record success");
           $('NotiSuccess').show();
@@ -124,4 +127,11 @@
         }
       });
     });
+
+
+    $(document).ready(function () {
+        
+    });
+
  </script>
+

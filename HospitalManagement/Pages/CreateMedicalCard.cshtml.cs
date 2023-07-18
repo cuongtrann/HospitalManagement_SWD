@@ -86,7 +86,7 @@ namespace HospitalManagement.Pages
             return Page();
         }
 
-        public IActionResult OnPostCreateMedicalRecord(string medicalHistory, string familyHistory)
+        public IActionResult OnGetCreateMedicalRecord(String medicalHistory, String familyHistory)
         {
             MedicalRecord = new MedicalRecord
             {
