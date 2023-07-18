@@ -4,7 +4,20 @@
 @{
 }
 <style>
-      
+    .column {
+        float: left;
+        width: 100%;
+        height: 500px;
+        overflow: auto;
+    }
+    
+    .columnItem {
+        width: 50%;
+    }
+
+    .inpVal{
+        width:500px;
+    }
       h1 {
         text-align: center;
         margin-top: 0;
@@ -47,42 +60,50 @@
   
     <div class="container">
     <h1 style="font-size:50px, larger">Create new Prescription</h1>
-      <label style="font-size:30px, larger" for="patientName">Patient Name:</label>
-      @*<input type="text" id="patientName" name="patientName" value="@Model.Patient.Profile.Name"/>*@
-    <label for="medicalRecord">Prescription:</label>
-    @*@if (Model.MedicalRecord != null)
-    {
-        <p>@Model.MedicalRecord.FamilyHistory</p>
-
-    } else
-    {
-        <button class="btn">Create New Medical Record</button>
-    }
-      <form asp-page-handler="">
-          <label for="symptom">Symptom:</label>
-      <select id="symptom" name="symptom">
-        <option value="">--Select Symptom--</option>
+    <form asp-page-handler="CreatePrescriiption" method="post">
+        <label for="symptom">Patient:</label>
+        @*<select id="userSelect" onchange="onUserSelectChange()" name="symptom">
+        <option value="">--Select Patient--</option>
         <!-- loop to get symptoms -->
-        @foreach(Sympton s in Model.ListSympton)
+        @foreach(var s in @Model.UserList)
         {
-            <option value="@s.Id">@s.Name</option>
+                var patient = @Model.ProfileList.FirstOrDefault(p => p.Id == s.ProfileId);
+                string patientName = patient != null ? patient.Name : "";
+                <option value="@s.Id">@patientName</option>
         }
-      </select>
+      </select>*@
       <label for="disease">Disease:</label>
-      <select id="disease" name="disease">
-        <option value="">--Select Disease--</option>
-        <!-- loop to get diseases -->
-        @foreach(Disease s in Model.ListDisease)
-        {
-            <option value="@s.Id">@s.Name</option>
-        }
-      </select>
-      <button class="btn">Create Prescription</button>
-      <button class="btn">Create Invoice</button>
+        <div class="column">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in @Model.MedicatioinList.Take(Model.MedicatioinList.Count() / 2))
+                    {
+                        <tr>
+                            <td class="columnItem">
+                                <label style="width:400px">
+                                    <input type="checkbox" name="selectedItems" value="@item.Id" />
+                                    @item.Name
+                                </label>
+                            </td>
+                            <td class="columnItem">
+                                <input class="inpVal" type="number" name="quantities[@item.Id]" value="1" min="0" max="100" required />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
       <br/>
       <br/>
-      <button type="submit" class="btn">Save Medical Examination Card</button>
+        <div style="clear:both;"></div>
+      <button type="submit" class="btn">Create a new Prescription</button>
       </form>
-      *@
+      
       
     </div>
+
