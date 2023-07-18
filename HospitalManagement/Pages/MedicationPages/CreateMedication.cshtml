@@ -1,0 +1,66 @@
+﻿@page
+@model HospitalManagement.Pages.MedicationPages.CreateMedicationModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+
+}
+<style>
+    .title_create {
+        background: linear-gradient(45deg, #dee2e6, transparent);
+        padding: 10px;
+    }
+</style>
+<div>
+    <h2 class="title_create">Create Medication</h2>
+    <hr style="width: 40%;margin-left: 750px;" />
+    <form class="p-4" method="post">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">Name<span class="text-danger">*</span></span>
+            </div>
+            <input name="Name" type="text" class="form-control" placeholder="Name" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">Description<span class="text-danger">*</span></span>
+            </div>
+            <input name="Description" type="text" class="form-control" placeholder="Description" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">Interaction<span class="text-danger">*</span></span>
+            </div>
+            <input name="Interaction" type="text" class="form-control" placeholder="Interaction" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">StorageCondition</span>
+            </div>
+            <input name="StorageCondition" type="text" class="form-control" placeholder="StorageCondition">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">SideEffect<span class="text-danger">*</span></span>
+            </div>
+            <input name="SideEffect" type="text" class="form-control" placeholder="SideEffect" required>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-1">
+                <span class="input-group-text">Contraindication</span>
+            </div>
+            <input name="Contraindication" type="text" class="form-control" placeholder="Contraindication">
+        </div>
+        
+        <div style="text-align: center; padding: 15px">
+            <button type="reset" class="btn btn-secondary w-25">RESET</button>
+            <button class="btn btn-success w-25" onclick="submitForm()">CREATE</button>
+        </div>
+    </form>
+</div>
+
+@if (Model.mess != null)
+{
+    <script>
+        alert("@Model.mess");
+    </script>
+}

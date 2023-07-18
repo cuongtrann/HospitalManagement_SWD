@@ -1,0 +1,41 @@
+﻿@page
+@model HospitalManagement.Pages.MedicationPages.MedicationListsModel
+
+@{
+    ViewData["Title"] = "List Medication";
+}
+
+<h1>List Medication</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Dosage Form</th>
+            <th>Interaction</th>
+            <th>Storage Condition</th>
+            <th>Side Effect</th>
+            <th>Contraindication</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var medication in Model.Medications)
+        {
+            <tr>
+                <td>@medication.Id</td>
+                <td>@medication.Name</td>
+                <td>@medication.Description</td>
+                <td>@medication.DosageForm</td>
+                <td>@medication.Interaction</td>
+                <td>@medication.StorageCondition</td>
+                <td>@medication.SideEffect</td>
+                <td>@medication.Contraindication</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-area="" asp-page="/MedicationPages/CreateMedication">Create Medication</a>
+</li>

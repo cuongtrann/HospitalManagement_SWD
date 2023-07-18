@@ -4,6 +4,8 @@ namespace HospitalManagement.DataAccess.IRepository
 {
     public interface IMedicationRepository
     {
-        Medication GetMedication(int medicationId);
+        List<Medication> GetMedication();
+        void CreateMedication(Medication medication);
+        void UpdateMedication(Medication medication);
     }
 }

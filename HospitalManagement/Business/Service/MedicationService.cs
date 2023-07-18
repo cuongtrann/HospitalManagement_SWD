@@ -1,26 +1,34 @@
-﻿using HospitalManagement.DataAccess.IRepository;
+﻿using HospitalManagement.Business.IService;
 using HospitalManagement.DataAccess.Models;
 
-namespace HospitalManagement.DataAccess.Repository
+namespace HospitalManagement.Business.Service
 {
-    public class MedicationRepository : IMedicationRepository
+    public class MedicationService : IMedicationService
     {
         SWD392_DBContext context;
 
-        public MedicationRepository(SWD392_DBContext context)
+        public MedicationService(SWD392_DBContext context)
         {
             this.context = context;
         }
 
-        public List<Medication> GetMedication()
-        {
-            return context.Medications.ToList();
-        }
+
         public void CreateMedication(Medication medication)
         {
             context.Medications.Add(medication);
             context.SaveChanges();
         }
+
+        public List<Medication> GetAllMedications()
+        {
+            return context.Medications.ToList();
+        }
+
+        public Medication GetMedicationById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateMedication(Medication medication)
         {
             var existingMedication = context.Medications.FirstOrDefault(m => m.Id == medication.Id);
@@ -37,7 +45,5 @@ namespace HospitalManagement.DataAccess.Repository
                 context.SaveChanges();
             }
         }
-
-
     }
 }
