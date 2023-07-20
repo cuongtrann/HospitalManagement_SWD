@@ -48,6 +48,7 @@
   
     <div class="container">
       <h1 style="font-size:50px, larger">Create new medical examination card</h1>
+      <div class="alert-list"></div>
       <label style="font-size:30px, larger" >Patient Name:</label>
       <input type="text" id="patientName" name="patientName" value="@Model.Patient.Profile.Name"/>
       <label >Medical Record:</label>
@@ -69,7 +70,7 @@
         <p style="color:green;display:none"  id="NotiSuccess"> Create new medical record success </p>
     </div>
 
-      <form asp-page-handler="CreateMedicalCard" method="post">
+      <form asp-page-handler="CreateMedicalCard" method="post" id="form">
           <label >Symptom:</label>
           <select id="symptom" name="sympton" asp-for="Sympton">
             <option value="0">--Select Symptom--</option>
@@ -92,7 +93,7 @@
           <button class="btn">Create Invoice</button>
           <br/>
           <br/>
-          <button type="submit" class="btn">Save Medical Examination Card</button>
+          <button type="button" id="btnSubmit" class="btn">Save Medical Examination Card</button>
       </form>
       
       
@@ -129,9 +130,23 @@
     });
 
 
-    $(document).ready(function () {
-        
+    $(document).on('click', "#btnSubmit", function (event) {
+        ShowAlert("success", "Create new medical card success!")
+        $("#form").submit();
     });
+
+
+    function ShowAlert(attr, mess) {
+    var alertList = $(".alert-list");
+    var el = document.createElement("div");
+    el.innerHTML = (`<div class="alert alert-${attr}" role="alert">
+              ${mess}
+            </div>`);
+    alertList.append(el);
+    setTimeout(() => {
+        $(el).remove();
+    }, 4000);
+}
 
  </script>
 
