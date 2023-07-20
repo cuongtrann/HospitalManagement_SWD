@@ -66,7 +66,7 @@
         <label >Family History:</label>
         <input type="text" id="FamilyHistory"/>
         <button class="btn" id="CreateRecord">Create</button>
-        <p style="color:green" id="NotiSuccess"> Create new medical record success </p>
+        <p style="color:green;display:none"  id="NotiSuccess"> Create new medical record success </p>
     </div>
 
       <form asp-page-handler="CreateMedicalCard" method="post">
@@ -117,7 +117,7 @@
             familyHistory : familyHis},
         success: function(data) {
           console.log("Create new medical record success");
-          $('NotiSuccess').show();
+          $('#NotiSuccess').show();
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(errorThrown);
