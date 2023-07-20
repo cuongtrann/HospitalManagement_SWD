@@ -85,5 +85,18 @@ namespace HospitalManagement.Pages
 
             return Page();
         }
+
+        public IActionResult OnGetCreateMedicalRecord(String medicalHistory, String familyHistory)
+        {
+            MedicalRecord = new MedicalRecord
+            {
+                Id = 0,
+                PatientId = patient.Id,
+                MedicalHistory = medicalHistory,
+                FamilyHistory = familyHistory
+            };
+            MedicalRecordRepository.Create(MedicalRecord);
+            return new JsonResult(true);
+        }
     }
 }
